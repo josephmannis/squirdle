@@ -1,6 +1,6 @@
 import React from "react";
 import { GuessState } from "../../containers/Game/Game";
-import { GridCell, GridRow } from "./WordGrid.styled";
+import { GridCell, GridRow, GridWrapper } from "./WordGrid.styled";
 
 export type GridUnit = {
   value: string;
@@ -43,5 +43,5 @@ export const WordGrid: React.FC<IWordGridProps> = ({
     return rows;
   };
 
-  return <div>{getRows()}</div>;
+  return <GridWrapper>{getRows()}</GridWrapper>;
 };

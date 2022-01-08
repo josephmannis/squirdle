@@ -1,26 +1,88 @@
 import styled from "styled-components";
+import theme from "../../theme";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #2ca6a4;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
-  align-items: center;
-  font-family: "Press Start 2P", cursive;
+  font-family: ${theme.font};
+  color: ${theme.textPrimaryColor};
 `;
 
 export const MainGame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: black;
+  justify-content: center;
+  height: 100%;
+  @media only screen and (max-width: 900px) {
+    width: 90%;
+  }
 `;
 
 export const SquirtleImage = styled.img`
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 35vw;
+  width: 20vw;
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
+`;
+
+export const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+  font-size: 60px;
+  margin: 0;
+  margin-bottom: 2vh;
+  font-weight: 800;
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
+`;
+
+export const GameStatus = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 97%;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 6px;
+  & > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const Button = styled.button`
+  background-color: ${theme.unknownColor};
+  padding: 14px 24px;
+  font-size: 14px;
+  border: none;
+  border-radius: 12px;
+  font-family: ${theme.font};
+  font-weight: bold;
+  color: ${theme.textPrimaryColor};
+  width: fit-content;
+
+  &:hover {
+    transition: all 0.1s linear;
+    transform: scale(1.05);
+  }
+`;
+
+export const EndWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  text-align: center;
+  align-items: center;
+  & ${Button} {
+    margin-top: 2em;
+  }
 `;

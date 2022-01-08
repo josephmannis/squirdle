@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { GuessState } from "../../containers/Game/Game";
+import theme from "../../theme";
 
 export const GridRow = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ interface IGridCellProps {
 const getGridColor = (state: GuessState) => {
   switch (state) {
     case "UNKNOWN":
-      return "#9DD9D2";
+      return theme.unknownColor;
     case "CORRECT":
       return "#52df8c";
     case "DISPLACED":
@@ -29,14 +30,33 @@ export const GridCell = styled.div<IGridCellProps>`
   background-color: ${({ state }) => getGridColor(state)};
   border-radius: 100%;
   box-shadow: rgb(0 35 70 / 26%) 0px 8px 24px;
-  width: 70px;
-  height: 70px;
-  margin: 10px;
-  color: black;
+  width: 50px;
+  height: 50px;
+  margin: 8px 12px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bolder;
+
+  @media only screen and (max-width: 1600px) {
+    width: 45px;
+    height: 45px;
+    font-size: 1em;
+    margin: 4px 8px;
+  }
+`;
+
+export const GridWrapper = styled.div`
+  border: 6px solid ${theme.unknownColor};
+  padding: 16px;
+  border-radius: 60px;
+
+  @media only screen and (max-width: 900px) {
+    border: none;
+    padding: 0px;
+    border-radius: 0;
+    margin-top: 2em;
+  }
 `;
