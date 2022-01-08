@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/squirdle/static/css/main.7f8762f8.css",
-    "main.js": "/squirdle/static/js/main.d8c68e8f.js",
+    "main.js": "/squirdle/static/js/main.7a4d6a2a.js",
     "static/js/787.55340061.chunk.js": "/squirdle/static/js/787.55340061.chunk.js",
     "static/media/win.svg": "/squirdle/static/media/win.b96b3610540896ede2b762b29d9677df.svg",
     "static/media/lose.svg": "/squirdle/static/media/lose.9148f83423976adb3e215a21da77cc7a.svg",
     "static/media/play.svg": "/squirdle/static/media/play.d84023656cbc1a93d47d9c9b4e9bbafc.svg",
     "index.html": "/squirdle/index.html",
     "main.7f8762f8.css.map": "/squirdle/static/css/main.7f8762f8.css.map",
-    "main.d8c68e8f.js.map": "/squirdle/static/js/main.d8c68e8f.js.map",
+    "main.7a4d6a2a.js.map": "/squirdle/static/js/main.7a4d6a2a.js.map",
     "787.55340061.chunk.js.map": "/squirdle/static/js/787.55340061.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7f8762f8.css",
-    "static/js/main.d8c68e8f.js"
+    "static/js/main.7a4d6a2a.js"
   ]
 }
