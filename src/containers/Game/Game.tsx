@@ -87,9 +87,7 @@ export const GameContainer: React.FC = () => {
   };
 
   const [pokemode, setPokemode] = useState(false);
-  const [currentAnswer, setCurrentAnswer] = useState(
-    getRandomFromArray(wordList).split("")
-  );
+  const [currentAnswer, setCurrentAnswer] = useState<string[]>([]);
   const [guessHistory, setGuessHistory] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState("");
   const [gameState, setGameState] = useState<GameState>("PLAYING");
@@ -167,13 +165,38 @@ export const GameContainer: React.FC = () => {
     return "INCORRECT";
   };
 
-  const generateGridState = (): GridState => {
-    const units: GridUnit[][] = guessHistory.map((guess) =>
-      guess.split("").map((char, colIdx) => ({
+  const getRowState = (guess: string): GridUnit[] => {
+    const guessArray = guess.split("");
+    const rowState: GridUnit[] = [];
+
+    guessArray.forEach((char, idx) => {
+      rowState.push({
         value: char,
-        state: getUnitState(char, colIdx),
-      }))
-    );
+        state: getUnitState(char, idx),
+      });
+    });
+
+    return rowState.map((v) => {
+      const currChar = v.value;
+
+      if (v.state === "DISPLACED") {
+        let numOccurances = currentAnswer.filter((c) => c === currChar).length;
+        let knownOccurrances = rowState.filter(
+          (gs) => gs.value === currChar && gs.state === "CORRECT"
+        ).length;
+
+        return {
+          value: currChar,
+          state: numOccurances === knownOccurrances ? "INCORRECT" : "DISPLACED",
+        };
+      }
+
+      return v;
+    });
+  };
+
+  const generateGridState = (): GridState => {
+    const units: GridUnit[][] = guessHistory.map(getRowState);
 
     const currentGuessRow: GridUnit[] = currentGuess.split("").map((char) => ({
       value: char,
