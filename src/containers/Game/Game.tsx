@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import wordList from "../../assets/all-words.json";
+import betterWords from "../../assets/betterwords.json";
 import "../../assets/keyboard.css";
 import LoseImage from "../../assets/lose.svg";
 import PlayImage from "../../assets/play.svg";
@@ -98,7 +99,7 @@ export const GameContainer: React.FC = () => {
   useEffect(() => {
     if (guessHistory.length === 0) {
       setCurrentAnswer(
-        getRandomFromArray(pokemode ? pokeList : wordList)
+        getRandomFromArray(pokemode ? pokeList : betterWords)
           .toLowerCase()
           .split("")
       );
