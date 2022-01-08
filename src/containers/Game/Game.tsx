@@ -14,10 +14,12 @@ import {
 } from "../../components/WordGrid/WordGrid";
 import { gameConfig } from "../../gameConfig";
 import useEventListener from "../../hooks/useEventListener";
+import theme from "../../theme";
 import {
   Button,
   EndWrapper,
   GameStatus,
+  LetterHighlighter,
   MainGame,
   SquirtleImage,
   Title,
@@ -26,7 +28,7 @@ import {
 
 export type GuessState = "UNKNOWN" | "CORRECT" | "DISPLACED" | "INCORRECT";
 type GameState = "WIN" | "LOSE" | "PLAYING";
-type GuessDictionary = Record<string, GuessState>;
+export type GuessDictionary = Record<string, GuessState>;
 
 const defaultDictionary: GuessDictionary = Object.fromEntries(
   "abcdefghijklmnopqrstuvwxyz".split("").map((c) => [c, "UNKNOWN"])
@@ -221,6 +223,21 @@ export const GameContainer: React.FC = () => {
     setGameState("PLAYING");
   };
 
+  const getLetterStyles = (): string => {
+    return Object.keys(letterguessState)
+      .map((letter) => {
+        if (letterguessState[letter] === "INCORRECT") {
+          return `
+          & div[data-skbtn=${letter}] {
+            background-color: ${theme.keyboardWrongLetterColor};
+            color: white;
+          }
+        `;
+        }
+      })
+      .join("\n");
+  };
+
   return (
     <Wrapper>
       <MainGame>
@@ -251,18 +268,20 @@ export const GameContainer: React.FC = () => {
             </Button>
           </EndWrapper>
         ) : (
-          <Keyboard
-            layout={{
-              default: [
-                "q w e r t y u i o p",
-                "a s d f g h j k l",
-                "z x c v b n m",
-                ...(window.innerWidth <= 900 ? ["{bksp} {enter}"] : []),
-              ],
-            }}
-            physicalKeyboardHighlight={true}
-            onKeyPress={onChange}
-          />
+          <LetterHighlighter styles={getLetterStyles()}>
+            <Keyboard
+              layout={{
+                default: [
+                  "q w e r t y u i o p",
+                  "a s d f g h j k l",
+                  "z x c v b n m",
+                  ...(window.innerWidth <= 900 ? ["{bksp} {enter}"] : []),
+                ],
+              }}
+              physicalKeyboardHighlight={true}
+              onKeyPress={onChange}
+            />
+          </LetterHighlighter>
         )}
       </MainGame>
       <SquirtleImage

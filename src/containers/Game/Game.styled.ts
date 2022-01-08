@@ -86,3 +86,12 @@ export const EndWrapper = styled.div`
     margin-top: 2em;
   }
 `;
+
+interface LetterHighlighterProps {
+  styles: string;
+}
+
+export const LetterHighlighter = styled.div<LetterHighlighterProps>`
+  ${({ styles }) => styles};
+  width: 100%;
+`;
