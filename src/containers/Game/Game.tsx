@@ -221,6 +221,7 @@ export const GameContainer: React.FC = () => {
   const resetGame = () => {
     setGuessHistory([]);
     setGameState("PLAYING");
+    setGuessState(defaultDictionary);
   };
 
   return (
