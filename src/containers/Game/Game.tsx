@@ -67,12 +67,22 @@ const tryAgainStatements = [
   "This is no time for a break",
 ];
 
+const SCORE_KEY = "SQUIRDLE_SCORE";
 const validWords = new Set(wordList);
 const validPokemon = new Set(pokeList);
 
 export const GameContainer: React.FC = () => {
   const getRandomFromArray = (array: any[]) => {
     return array[Math.floor(Math.random() * array.length)];
+  };
+
+  const restoreStreak = () => {
+    const score = localStorage.getItem(SCORE_KEY);
+
+    if (score) {
+      return parseInt(score);
+    }
+    return 0;
   };
 
   const [pokemode, setPokemode] = useState(false);
@@ -84,7 +94,7 @@ export const GameContainer: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>("PLAYING");
   const [letterguessState, setGuessState] =
     useState<GuessDictionary>(defaultDictionary);
-  const [winStreak, setWinStreak] = useState(0);
+  const [winStreak, setWinStreak] = useState(restoreStreak());
 
   useEffect(() => {
     if (guessHistory.length === 0) {
@@ -100,6 +110,10 @@ export const GameContainer: React.FC = () => {
     setCurrentGuess("");
     checkWin();
   }, [guessHistory]);
+
+  useEffect(() => {
+    localStorage.setItem(SCORE_KEY, winStreak.toString());
+  }, [winStreak]);
 
   useEffect(() => {
     setWinStreak((s) =>
