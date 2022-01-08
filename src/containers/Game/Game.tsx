@@ -43,6 +43,9 @@ const winStatements = [
   "Squirtle is pleased with your performance.",
   "gucci guuci prada prada my wordle score is more than nada (im fire)",
   "damn girl are u a book because that shit was wordy",
+  "So what, you think you can read?",
+  "Now you are spelling with petrol",
+  'oooo wow u were all like "chessmate" and the game was like daaaaaamn',
 ];
 
 const loseStatements = [
@@ -53,6 +56,11 @@ const loseStatements = [
   "Jesus weeps.",
   "Squirtle is dissappointed.",
   "Well shuckle :(",
+  "You really shit the bed there huh",
+  "hint: try beans as a starter, if you haven't already",
+  "Things might be diffcult. But you are going to be difficulter.",
+  "Absolutely bungled!",
+  "I promise that for the rest of my life I'll run an experiment where I forget that just happened.",
 ];
 
 const highWinStreakStatements = [
