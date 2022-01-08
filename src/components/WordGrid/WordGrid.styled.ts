@@ -10,19 +10,16 @@ interface IGridCellProps {
   state: GuessState;
 }
 
-export const getGridColor = (
-  state: GuessState,
-  isForKeyboard: boolean = false
-) => {
+export const getGridColor = (state: GuessState) => {
   switch (state) {
     case "UNKNOWN":
       return theme.unknownColor;
     case "CORRECT":
-      return "#52df8c";
+      return theme.correctColor;
     case "DISPLACED":
-      return "#F4D06F";
+      return theme.displacedColor;
     case "INCORRECT":
-      return isForKeyboard ? theme.keyboardWrongLetterColor : "#DE3C4B";
+      return theme.incorrectColor;
   }
 };
 
@@ -31,6 +28,8 @@ export const GridCell = styled.div<IGridCellProps>`
     ${({ state }) => (state === "UNKNOWN" ? "transparent" : "transparent")};
 
   background-color: ${({ state }) => getGridColor(state)};
+  color: ${theme.textPrimaryColor};
+
   border-radius: 100%;
   box-shadow: rgb(0 35 70 / 26%) 0px 8px 24px;
   width: 50px;

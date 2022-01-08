@@ -99,12 +99,8 @@ export const LetterHighlighter = styled.div<LetterHighlighterProps>`
       .map((letter) => {
         return `
           & div[data-skbtn=${letter}] {
-            background-color: ${getGridColor(guessState[letter], true)};
-            color: ${
-              guessState[letter] === "UNKNOWN"
-                ? theme.textPrimaryColor
-                : "white"
-            };
+            background-color: ${getGridColor(guessState[letter])};
+            
           }
         `;
       })
