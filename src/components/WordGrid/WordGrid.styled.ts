@@ -10,7 +10,10 @@ interface IGridCellProps {
   state: GuessState;
 }
 
-const getGridColor = (state: GuessState) => {
+export const getGridColor = (
+  state: GuessState,
+  isForKeyboard: boolean = false
+) => {
   switch (state) {
     case "UNKNOWN":
       return theme.unknownColor;
@@ -19,7 +22,7 @@ const getGridColor = (state: GuessState) => {
     case "DISPLACED":
       return "#F4D06F";
     case "INCORRECT":
-      return "#DE3C4B";
+      return isForKeyboard ? theme.keyboardWrongLetterColor : "#DE3C4B";
   }
 };
 

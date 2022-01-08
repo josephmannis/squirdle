@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { getGridColor } from "../../components/WordGrid/WordGrid.styled";
 import theme from "../../theme";
 import { GuessDictionary } from "./Game";
 
@@ -96,14 +97,16 @@ export const LetterHighlighter = styled.div<LetterHighlighterProps>`
   ${({ guessState }) => {
     return Object.keys(guessState)
       .map((letter) => {
-        if (guessState[letter] === "INCORRECT") {
-          return `
+        return `
           & div[data-skbtn=${letter}] {
-            background-color: ${theme.keyboardWrongLetterColor};
-            color: white;
+            background-color: ${getGridColor(guessState[letter], true)};
+            color: ${
+              guessState[letter] === "UNKNOWN"
+                ? theme.textPrimaryColor
+                : "white"
+            };
           }
         `;
-        }
       })
       .join("\n");
   }}
