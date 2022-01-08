@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../theme";
+import { GuessDictionary } from "./Game";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -88,10 +89,23 @@ export const EndWrapper = styled.div`
 `;
 
 interface LetterHighlighterProps {
-  styles: string;
+  guessState: GuessDictionary;
 }
 
 export const LetterHighlighter = styled.div<LetterHighlighterProps>`
-  ${({ styles }) => styles};
+  ${({ guessState }) => {
+    return Object.keys(guessState)
+      .map((letter) => {
+        if (guessState[letter] === "INCORRECT") {
+          return `
+          & div[data-skbtn=${letter}] {
+            background-color: ${theme.keyboardWrongLetterColor};
+            color: white;
+          }
+        `;
+        }
+      })
+      .join("\n");
+  }}
   width: 100%;
 `;

@@ -14,7 +14,6 @@ import {
 } from "../../components/WordGrid/WordGrid";
 import { gameConfig } from "../../gameConfig";
 import useEventListener from "../../hooks/useEventListener";
-import theme from "../../theme";
 import {
   Button,
   EndWrapper,
@@ -185,13 +184,14 @@ export const GameContainer: React.FC = () => {
   };
 
   const submitGuess = () => {
-    // TODO: check if it's a word
+    const isWord =
+      (pokemode && validPokemon.has(currentGuess)) ||
+      validWords.has(currentGuess);
 
-    if (
-      !atMaxGuesses() &&
-      ((pokemode && validPokemon.has(currentGuess)) ||
-        validWords.has(currentGuess))
-    ) {
+    if (!isWord) {
+      window.alert("That, my friend, is not what we call a word.");
+    }
+    if (!atMaxGuesses() && isWord) {
       const guessState = { ...letterguessState };
 
       currentGuess.split("").forEach((c, i) => {
@@ -221,21 +221,6 @@ export const GameContainer: React.FC = () => {
   const resetGame = () => {
     setGuessHistory([]);
     setGameState("PLAYING");
-  };
-
-  const getLetterStyles = (): string => {
-    return Object.keys(letterguessState)
-      .map((letter) => {
-        if (letterguessState[letter] === "INCORRECT") {
-          return `
-          & div[data-skbtn=${letter}] {
-            background-color: ${theme.keyboardWrongLetterColor};
-            color: white;
-          }
-        `;
-        }
-      })
-      .join("\n");
   };
 
   return (
@@ -268,7 +253,7 @@ export const GameContainer: React.FC = () => {
             </Button>
           </EndWrapper>
         ) : (
-          <LetterHighlighter styles={getLetterStyles()}>
+          <LetterHighlighter guessState={letterguessState}>
             <Keyboard
               layout={{
                 default: [
